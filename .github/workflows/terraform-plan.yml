@@ -11,6 +11,9 @@ jobs:
     name: Terraform Plan
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
+    permissions:
+      id-token: write  # Required for OIDC
+      contents: read   # For checking out code
     defaults:
       run:
         shell: bash
