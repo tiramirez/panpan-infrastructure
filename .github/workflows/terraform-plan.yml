@@ -43,14 +43,5 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -var-file="terraform.tfvars"
 
-      - name: Wait for manual approval
-        uses: trstringer/manual-approval@v1
-        with:
-          secret: ${{ secrets.GITHUB_TOKEN }}
-          approvers: tiramirez
-          minimum-approvals: 1
-          issue-title: "Approve Terraform Apply for ${{ github.ref_name }}"
-          issue-body: "Approve this issue to apply the Terraform changes to the `${{ github.ref_name }}` workspace."
-
       - name: Terraform Apply
         run: terraform apply -var-file="terraform.tfvars" -auto-approve
