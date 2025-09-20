@@ -3,8 +3,8 @@ name: Terraform Plan and Apply
 on:
   push:
     branches:
-      - dev
-      - main
+      - prod
+      - develop
 
 jobs:
   terraform:
