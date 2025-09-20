@@ -77,7 +77,7 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
 # Data source to check if S3 object exists
 data "aws_s3_object" "lambda_package" {
   bucket = module.s3_bucket.s3_bucket_id
-  key    = var.lambda_zip_key
+  key    = "lambda_test.zip"
 }
 
 module "lambda_function_from_s3_zip_file" {
@@ -87,7 +87,7 @@ module "lambda_function_from_s3_zip_file" {
   description   = "Test lambda function for ${var.project_name} in ${terraform.workspace}"
   handler       = var.lambda_handler
   runtime       = var.lambda_runtime
-  role_arn      = aws_iam_role.lambda_role.arn
+  lambda_role   = aws_iam_role.lambda_role.arn
 
   create_package      = false
   s3_existing_package = {
